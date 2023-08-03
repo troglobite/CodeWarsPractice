@@ -1,4 +1,4 @@
-name:                haskell
+name:                code-wars-solutions
 version:             0.1.0.0
 github:              "githubuser/haskell"
 license:             BSD3
@@ -40,7 +40,7 @@ library:
   source-dirs: src
 
 executables:
-  haskell-exe:
+  helpers-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -48,7 +48,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - haskell
+    - code-wars-solutions
 
 tests:
   haskell-test:
@@ -59,4 +59,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - haskell
+    - code-wars-solutions
