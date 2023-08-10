@@ -33,13 +33,38 @@ pageCount :: Collection a -> ItemsPerPage -> Int
 pageCount xs n = ceiling $ fromIntegral (itemCount xs) / fromIntegral n
 
 pageItemCount :: Collection a -> ItemsPerPage -> Int -> Maybe Int
-pageItemCount xs n 0 = Just n -- First page is always ItemsPerPage
+pageItemCount [] n page = Nothing -- Empty collection
+pageItemCount xs n 0 = do
+    if itemCount xs < n 
+    then
+        Just $ itemCount xs
+    else
+        Just n -- First page is always ItemsPerPage
 pageItemCount xs n page
-    | (page + 1) > pageCount xs n = Nothing -- Out of bounds
-    | (page + 1) < pageCount xs n = Just n -- before last page is always itemsPerPage number
-    | otherwise                   = Just $ itemCount xs `rem` n -- Last page
+    | n < 0 || page < 1         = Nothing
+    | page + 1 > pageCount xs n = Nothing -- Out of bounds
+    | page + 1 < pageCount xs n = do
+        if itemCount xs < n
+        then
+            Just $ itemCount xs
+        else
+            Just n
+    | otherwise                 = Just $ itemCount xs `rem` n -- Last page
+
+-- pageItemCount [()] 2 0
+-- Falsifiable (after 1 test):
+-- [()]
+-- Positive {getPositive = 2}
+-- 0
+-- expected: Nothing
+-- but got: Just 1
 
 pageIndex :: Collection a -> ItemsPerPage -> Int -> Maybe Int
+pageIndex [] n item = Nothing -- Empty collection
 pageIndex xs n item
-    | itemCount xs < (item + 1) = Nothing -- Item does not exist in collection
-    | itemCount xs > (item + 1) = Just 0 -- Item is on first page
+    | n < 0 || item < 0       = Nothing
+    | itemCount xs < item + 1 = Nothing -- Item does not exist in collection
+    | n > item + 1            = Just 0 -- Item is on first page
+    | otherwise               = Just $ floor $ fromIntegral item / fromIntegral n
+
+
