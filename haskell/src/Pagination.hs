@@ -51,13 +51,6 @@ pageItemCount xs n page
             Just n
     | otherwise                 = Just $ itemCount xs `rem` n -- Last page
 
--- pageItemCount [()] 2 0
--- Falsifiable (after 1 test):
--- [()]
--- Positive {getPositive = 2}
--- 0
--- expected: Nothing
--- but got: Just 1
 
 pageIndex :: Collection a -> ItemsPerPage -> Int -> Maybe Int
 pageIndex [] n item = Nothing -- Empty collection

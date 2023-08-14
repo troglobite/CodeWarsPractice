@@ -28,6 +28,7 @@ library
       DeadFish
       Lib
       Pagination
+      RomanNumerals
       TenMinuteWalk
   other-modules:
       Paths_code_wars_solutions
@@ -62,6 +63,7 @@ test-suite haskell-test
   other-modules:
       DeadFishSpec
       PaginationSpec
+      RomanNumeralsSpec
       TenMinuteWalkSpec
       Paths_code_wars_solutions
   hs-source-dirs:
