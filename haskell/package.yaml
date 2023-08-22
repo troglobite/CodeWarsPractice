@@ -24,6 +24,8 @@ dependencies:
 - hspec
 - quickcheck-instances
 - QuickCheck
+- servant-server
+- text
 
 ghc-options:
 - -Wall

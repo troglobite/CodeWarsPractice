@@ -31,10 +31,10 @@ data RomanNumber
   | C
   | D
   | M
-  deriving (Show, Eq, Generic)
+  deriving (Show, Eq)
 
-toRomanNumber :: Integer -> RomanNumber
-toRomanNumber =
+toRomanNumeral :: Integer -> RomanNumber
+toRomanNumeral i =
   case i of
     1 -> I
     5 -> V
@@ -44,8 +44,8 @@ toRomanNumber =
     500 -> D
     1000 -> M
 
-fromRomanNumber :: RomanNumber -> Integer
-fromRomanNumber =
+fromRomanNumeral :: RomanNumber -> Integer
+fromRomanNumeral s =
   case s of
     I -> 1
     V -> 5
@@ -56,4 +56,4 @@ fromRomanNumber =
     M -> 1000
 
 solution :: Integer -> String
-solution n = do
+solution n = undefined

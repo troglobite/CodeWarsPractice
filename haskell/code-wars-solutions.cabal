@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      API
       DeadFish
       Lib
       Pagination
@@ -40,6 +41,8 @@ library
     , base >=4.7 && <5
     , hspec
     , quickcheck-instances
+    , servant-server
+    , text
   default-language: Haskell2010
 
 executable helpers-exe
@@ -55,6 +58,8 @@ executable helpers-exe
     , code-wars-solutions
     , hspec
     , quickcheck-instances
+    , servant-server
+    , text
   default-language: Haskell2010
 
 test-suite haskell-test
@@ -75,4 +80,6 @@ test-suite haskell-test
     , code-wars-solutions
     , hspec
     , quickcheck-instances
+    , servant-server
+    , text
   default-language: Haskell2010
