@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use :" #-}
 module RomanNumerals where
 import GHC.Base (Symbol)
 import GHC.Generics (V1, Generic)
@@ -55,5 +57,11 @@ fromRomanNumeral s =
     D -> 500
     M -> 1000
 
-solution :: Integer -> String
-solution n = undefined
+-- solution :: Integer -> String
+solution n = do
+  let x = show n
+      y = length x - 1
+      z = reverse [0..y]
+      x' = zip x z
+      y' = map (\x -> concat $ [[fst x]] ++ [replicate (snd x) '0']) x'
+  y'
