@@ -14,6 +14,6 @@ spec = do
     it "should translate 89 to LXXXIX" $ solution 89 `shouldBe` "LXXXIX"
     it "should translate 91 to XCI" $ solution 91 `shouldBe` "XCI"
     it "should translate 984 to CMLXXXIV" $ solution 984 `shouldBe` "CMLXXXIV"
-    it "should translate 1000 to M" $ solution 1889 `shouldBe` "MDCCCLXXXIX"
+    it "should translate 1000 to M" $ solution 1000 `shouldBe` "M"
     it "should translate 1889 to MDCCCLXXXIX" $ solution 1889 `shouldBe` "MDCCCLXXXIX"
     it "should translate 1989 to MCMLXXXIX" $ solution 1989 `shouldBe` "MCMLXXXIX"

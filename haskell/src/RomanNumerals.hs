@@ -33,7 +33,30 @@ data RomanNumber
   | C
   | D
   | M
+  | OutOfBounds
   deriving (Show, Eq)
+
+toString :: RomanNumber -> String
+toString r =
+  case r of
+    I -> "I"
+    V -> "V"
+    X -> "X"
+    L -> "L"
+    C -> "C"
+    D -> "D"
+    M -> "M"
+
+fromString :: String -> RomanNumber
+fromString s =
+  case s of
+    "I" -> I
+    "V" -> V
+    "X" -> X
+    "L" -> L
+    "C" -> C
+    "D" -> D
+    "M" -> M
 
 toRomanNumeral :: Integer -> RomanNumber
 toRomanNumeral i =
@@ -59,9 +82,30 @@ fromRomanNumeral s =
 
 -- solution :: Integer -> String
 solution n = do
-  let x = show n
-      y = length x - 1
-      z = reverse [0..y]
+  let x = show n -- Turn int into string, i.e. "1989"
+      y = length x - 1 -- Count of all but the last digit, i.e. 3
+      z = reverse [0..y] -- Creates an numbered index, i.e. [1,2,3]
+      -- Merges the numbered index with the string, this breaks the string
+      -- up into each placement and pairs them each with a number that 
+      -- represents the amount of zeros that follow it, i.e. [('1',3),('9',2),('8',1),('9',0)]
       x' = zip x z
+      -- Takes the mapping and adds the appropriate amount of zeros to each digit
+      -- i.e. ["1000","900","80","9"]
       y' = map (\x -> concat $ [[fst x]] ++ [replicate (snd x) '0']) x'
   y'
+
+-- Need to take a string like "9" and split it into its composite parts
+-- So "9" would be (1, 10). Position will most likely be important here 
+-- as it means 1 less then 10 and not 1 more then 10
+split :: String -> Int
+split x =
+  x` = x
+
+
+
+
+  -- Notes and other rambeling:
+  -- Conceptually im breaking this down to concreate and composite numbers
+  -- concreate numerals are those which are respresented by eaxactly one symbol, i.e. I, X V ... etc
+  -- composite numerals are those which are represented by a combination of concreate numerals, i.e. VI, IX, XI ... etc
+  -- All concreate numerals have accompaning composites, which are all composites within 2 digits of itself, i.e. V composites are (IIV, IV, VI, VII)
