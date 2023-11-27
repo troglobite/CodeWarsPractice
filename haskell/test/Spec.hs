@@ -4,6 +4,7 @@ import qualified DeadFishSpec
 import qualified TenMinuteWalkSpec
 import qualified PaginationSpec
 import qualified RomanNumeralsSpec
+import qualified ReverseSpec
 
 main :: IO ()
 main = hspec spec
@@ -14,3 +15,4 @@ spec = do
   describe "TenMinuteWalk" TenMinuteWalkSpec.spec
   describe "Pagination" PaginationSpec.spec
   describe "RomanNumerals" RomanNumeralsSpec.spec
+  describe "Reverse" Reverse.spec

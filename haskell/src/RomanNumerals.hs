@@ -1,6 +1,5 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use :" #-}
 module RomanNumerals where
+
 import GHC.Base (Symbol)
 import GHC.Generics (V1, Generic)
 
@@ -33,7 +32,6 @@ data RomanNumber
   | C
   | D
   | M
-  | OutOfBounds
   deriving (Show, Eq)
 
 toString :: RomanNumber -> String
@@ -96,10 +94,12 @@ solution n = do
 
 -- Need to take a string like "9" and split it into its composite parts
 -- So "9" would be (1, 10). Position will most likely be important here 
--- as it means 1 less then 10 and not 1 more then 10
+-- as it means 1 less then 10 and not 1 more then 10.
+-- Needs to be strictly in terms of RomanNumerals, i.e. 8 = (1, 1, 1, 5) 3 more than 5
+-- And not (3, 5)
 split :: String -> Int
-split x =
-  x` = x
+split x = undefined
+  -- x` = x
 
 
 
@@ -109,3 +109,4 @@ split x =
   -- concreate numerals are those which are respresented by eaxactly one symbol, i.e. I, X V ... etc
   -- composite numerals are those which are represented by a combination of concreate numerals, i.e. VI, IX, XI ... etc
   -- All concreate numerals have accompaning composites, which are all composites within 2 digits of itself, i.e. V composites are (IIV, IV, VI, VII)
+  -- Composite Numerals cannot be longer than 4 digits, 8 = VIII which is four digits already so 9 needs to be in terms of the next numeral which is X so 9 = IX or 1 less than 10 
