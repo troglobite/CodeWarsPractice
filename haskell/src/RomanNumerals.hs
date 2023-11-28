@@ -45,27 +45,29 @@ toString r =
     D -> "D"
     M -> "M"
 
-fromString :: String -> RomanNumber
+fromString :: String -> Maybe RomanNumber
 fromString s =
   case s of
-    "I" -> I
-    "V" -> V
-    "X" -> X
-    "L" -> L
-    "C" -> C
-    "D" -> D
-    "M" -> M
+    "I" -> Just I
+    "V" -> Just V
+    "X" -> Just X
+    "L" -> Just L
+    "C" -> Just C
+    "D" -> Just D
+    "M" -> Just M
+    _ -> Nothing
 
-toRomanNumeral :: Integer -> RomanNumber
+toRomanNumeral :: Integer -> Maybe RomanNumber
 toRomanNumeral i =
   case i of
-    1 -> I
-    5 -> V
-    10 -> X
-    50 -> L
-    100 -> C
-    500 -> D
-    1000 -> M
+    1 -> Just I
+    5 -> Just V
+    10 -> Just X
+    50 -> Just L
+    100 -> Just C
+    500 -> Just D
+    1000 -> Just M
+    _ -> Nothing
 
 fromRomanNumeral :: RomanNumber -> Integer
 fromRomanNumeral s =
@@ -97,9 +99,22 @@ solution n = do
 -- as it means 1 less then 10 and not 1 more then 10.
 -- Needs to be strictly in terms of RomanNumerals, i.e. 8 = (1, 1, 1, 5) 3 more than 5
 -- And not (3, 5)
-split :: String -> Int
-split x = undefined
-  -- x` = x
+splitIntoNumerals :: String -> (Int, Int)
+splitIntoNumerals x = do
+  let x` = read x :: Integer
+  case toRomanNumeral x` of
+    Just n -> (0, x') -- This is a Concrete Numeral 
+    Nothing -> do
+      case x` of
+        (x` <  5) -> 
+        (x` < 10)
+        (x` < 50)
+        (x` < 100)
+        (x` < 500)
+        (x` < 1000)
+
+
+    
 
 
 
