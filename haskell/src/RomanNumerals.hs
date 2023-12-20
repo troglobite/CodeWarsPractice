@@ -80,7 +80,7 @@ fromRomanNumeral s =
     D -> 500
     M -> 1000
 
--- solution :: Integer -> String
+solution :: Integer -> String
 solution n = do
   let x = show n -- Turn int into string, i.e. "1989"
       y = length x - 1 -- Count of all but the last digit, i.e. 3
@@ -92,7 +92,7 @@ solution n = do
       -- Takes the mapping and adds the appropriate amount of zeros to each digit
       -- i.e. ["1000","900","80","9"]
       y' = map (\x -> concat $ [[fst x]] ++ [replicate (snd x) '0']) x'
-  y'
+  show y'
 
 -- Need to take a string like "9" and split it into its composite parts
 -- So "9" would be (1, 10). Position will most likely be important here 
@@ -101,17 +101,17 @@ solution n = do
 -- And not (3, 5)
 splitIntoNumerals :: String -> (Int, Int)
 splitIntoNumerals x = do
-  let x` = read x :: Integer
-  case toRomanNumeral x` of
+  let x' = (read x :: Integer)
+  case toRomanNumeral x' of
     Just n -> (0, x') -- This is a Concrete Numeral 
     Nothing -> do
-      case x` of
-        (x` <  5) -> 
-        (x` < 10)
-        (x` < 50)
-        (x` < 100)
-        (x` < 500)
-        (x` < 1000)
+      case x' of
+        (< 5) -> (5 - x', 5) 
+        (< 10)
+        (< 50)
+        (< 100)
+        (< 500)
+        (< 1000)
 
 
     
