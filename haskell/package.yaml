@@ -2,9 +2,9 @@ name:                code-wars-solutions
 version:             0.1.0.0
 github:              "githubuser/haskell"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2023 Author name here"
+author:              "Brian Parry"
+maintainer:          "brianparry089@gmail.com"
+copyright:           "2023 Brian Parry"
 
 extra-source-files:
 - README.md
@@ -40,6 +40,27 @@ ghc-options:
 
 library:
   source-dirs: src
+  dependencies:
+    - hspec
+    - quickcheck-instances
+    - QuickCheck
+    - servant
+    - servant-server
+    - text
+    - aeson
+    - bytestring
+    - containers
+    - http-client
+    - http-client-tls
+    - http-types
+    - servant
+    - servant-client
+    - servant-docs
+    - servant-server
+    - text
+    - transformers
+    - wai
+    - warp
 
 executables:
   helpers-exe:
@@ -51,6 +72,8 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - code-wars-solutions
+    - servant
+    - servant-server
 
 tests:
   haskell-test:
