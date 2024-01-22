@@ -101,17 +101,18 @@ solution n = do
 -- And not (3, 5)
 splitIntoNumerals :: String -> (Int, Int)
 splitIntoNumerals x = do
-  let x' = (read x :: Integer)
-  case toRomanNumeral x' of
-    Just n -> (0, x') -- This is a Concrete Numeral 
-    Nothing -> do
-      case x' of
-        (< 5) -> (5 - x', 5) 
-        (< 10)
-        (< 50)
-        (< 100)
-        (< 500)
-        (< 1000)
+  undefined
+  -- let x' = (read x :: Integer)
+  -- case toRomanNumeral x' of
+  --   Just n -> (0, x') -- This is a Concrete Numeral 
+  --   Nothing -> do
+  --     case x' of
+  --       (< 5) -> (5 - x', 5) 
+  --       (< 10)
+  --       (< 50)
+  --       (< 100)
+  --       (< 500)
+  --       (< 1000)
 
 
     

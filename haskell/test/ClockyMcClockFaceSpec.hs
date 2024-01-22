@@ -1,6 +1,6 @@
 module ClockyMcClockFaceSpec where
 
-import Kata.ClockyMcClockFace (whatTimeIsIt)
+import ClockyMcClockFace (whatTimeIsIt)
 import Test.Hspec
 
 spec :: Spec
