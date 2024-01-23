@@ -33,6 +33,7 @@ library
       RomanNumerals
       Server
       TenMinuteWalk
+      Types.Server
   other-modules:
       Paths_code_wars_solutions
   hs-source-dirs:

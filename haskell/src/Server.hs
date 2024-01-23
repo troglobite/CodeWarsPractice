@@ -25,10 +25,10 @@ import Types.Server (TenMinuteWalkRequest)
 -- import Types
 
 type SolutionsAPI = "api" :> "status" :> Get '[JSON] Bool
-    <|> "api" :> "solutions" :> "ten-minute-walk" :> ReqBody TenMinuteWalkRequest :> Post '[JSON] Bool
+    :<|> "api" :> "solutions" :> "ten-minute-walk" :> ReqBody '[JSON] TenMinuteWalkRequest :> Post '[JSON] Bool
 
 solutionServer :: Server SolutionsAPI
-solutionServer = statusHandler
+solutionServer = statusHandler :<|> tenMinuteHandler
 
 statusHandler :: Handler Bool
 statusHandler = return True
@@ -37,7 +37,7 @@ solutionsAPI :: Proxy SolutionsAPI
 solutionsAPI = Proxy :: Proxy SolutionsAPI
 
 tenMinuteHandler :: TenMinuteWalkRequest -> Handler Bool
-tenMinuteHandler req = undefined
+tenMinuteHandler req = undefined -- Convert TenMinuteWalk to take the request and plugin here
 
 
 -- Run in ghci

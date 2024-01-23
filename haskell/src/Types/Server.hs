@@ -1,32 +1,56 @@
+{-# LANGUAGE DeriveGeneric         #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+
 module Types.Server (TenMinuteWalkRequest) where
 
+import GHC.Generics
+import Data.Aeson
+import qualified Data.Char as C
 
-type TenMinuteWalkRequest =
-    { directions :: Directions    
+newtype TenMinuteWalkRequest = TenMinuteWalkRequest
+    { directions :: [Direction]    
     } deriving (Show, Eq, Generic)
 
+-- instance FromJSON TenMinuteWalkRequest where
+--     parseJSON = withObject "TenMinuteWalkRequest" $ \o -> do
+--       directions <- o .: "directions"
+--       pure TenMinuteWalkRequest{..}
 
-type Direction
-    = N
-    | S
-    | E
-    | W
+instance FromJSON TenMinuteWalkRequest where
+  parseJSON = genericParseJSON options
+instance ToJSON TenMinuteWalkRequest where
+  toJSON = genericToJSON options
+
+
+data Direction
+    = North
+    | South
+    | East
+    | West
     deriving (Show, Eq, Generic)
 
 
-tenMinuteFromString :: String -> Direction
+tenMinuteFromString :: String -> Maybe Direction
 tenMinuteFromString s =
-    case s of
-        "n" -> Just N
-        "s" -> Just S
-        "w" -> Just W
-        "e" -> Just E
-        "N" -> Just N
-        "W" -> Just W
-        "E" -> Just E
-        "S" -> Just S
+    case C.toUpper $ head s of
+        'N' -> Just North
+        'W' -> Just West
+        'E' -> Just East
+        'S' -> Just South
         _ -> Nothing
 
 
 instance FromJSON Direction
-    parseJSON = undefined
+instance ToJSON Direction
+
+options :: Options
+options = defaultOptions
+  { omitNothingFields = True
+  , fieldLabelModifier = rename
+  }
+
+  where
+    rename "type_" = "type"
+    rename other   = other
