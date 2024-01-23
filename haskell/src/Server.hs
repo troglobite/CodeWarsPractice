@@ -21,9 +21,11 @@ import Servant
 import Servant.Docs
 import Servant.Docs.Internal (ToAuthInfo(..), DocAuthentication(..))
 import Servant.Server.Experimental.Auth
+import Types.Server (TenMinuteWalkRequest)
 -- import Types
 
 type SolutionsAPI = "api" :> "status" :> Get '[JSON] Bool
+    <|> "api" :> "solutions" :> "ten-minute-walk" :> ReqBody TenMinuteWalkRequest :> Post '[JSON] Bool
 
 solutionServer :: Server SolutionsAPI
 solutionServer = statusHandler
@@ -33,6 +35,10 @@ statusHandler = return True
 
 solutionsAPI :: Proxy SolutionsAPI
 solutionsAPI = Proxy :: Proxy SolutionsAPI
+
+tenMinuteHandler :: TenMinuteWalkRequest -> Handler Bool
+tenMinuteHandler req = undefined
+
 
 -- Run in ghci
 main :: IO ()
