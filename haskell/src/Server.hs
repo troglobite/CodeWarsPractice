@@ -24,14 +24,14 @@ import Servant.Server.Experimental.Auth
 import Types.Server (TenMinuteWalkRequest)
 -- import Types
 
-type SolutionsAPI = "api" :> "status" :> Get '[JSON] Bool
+type SolutionsAPI = "api" :> "status" :> Get '[JSON] NoContent
     :<|> "api" :> "solutions" :> "ten-minute-walk" :> ReqBody '[JSON] TenMinuteWalkRequest :> Post '[JSON] Bool
 
 solutionServer :: Server SolutionsAPI
 solutionServer = statusHandler :<|> tenMinuteHandler
 
-statusHandler :: Handler Bool
-statusHandler = return True
+statusHandler :: Handler NoContent
+statusHandler = return NoContent -- Makes sense if you think about it
 
 solutionsAPI :: Proxy SolutionsAPI
 solutionsAPI = Proxy :: Proxy SolutionsAPI
