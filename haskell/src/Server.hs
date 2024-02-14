@@ -22,6 +22,7 @@ import Servant.Docs
 import Servant.Docs.Internal (ToAuthInfo(..), DocAuthentication(..))
 import Servant.Server.Experimental.Auth
 import Types.Server (TenMinuteWalkRequest)
+import TenMinuteWalk (isValidWalk)
 -- import Types
 
 type SolutionsAPI = "api" :> "status" :> Get '[JSON] NoContent
@@ -37,9 +38,12 @@ solutionsAPI :: Proxy SolutionsAPI
 solutionsAPI = Proxy :: Proxy SolutionsAPI
 
 tenMinuteHandler :: TenMinuteWalkRequest -> Handler Bool
-tenMinuteHandler req = undefined -- Convert TenMinuteWalk to take the request and plugin here
+tenMinuteHandler req = do
+    dirs <- directions req
+    pure $ isValidWalk dirs
+    -- pure True
 
 
 -- Run in ghci
-main :: IO ()
-main = run 8000 (serve solutionsAPI solutionServer)
+start :: IO ()
+start = run 8000 (serve solutionsAPI solutionServer)

@@ -1,6 +1,7 @@
 module TenMinuteWalk (isValidWalk, isValidWalk', countOf) where
 
 import Data.List (findIndices)
+import Types.Server (Direction (..))
 
 
 -- You live in the city of Cartesia where all roads are laid out in a perfect grid.
@@ -16,22 +17,22 @@ import Data.List (findIndices)
 --  and will, of course, return you to your starting point. Return false otherwise.
 
 
-isValidWalk :: [Char] -> Bool
+isValidWalk :: [Direction] -> Bool
 isValidWalk walk
    -- Probably better way to do this, but this is still non-linear so its safe on inifinit lists
   | (\x -> (x > 10) || (x < 10)) . length $ take 11 walk = False
   | otherwise = isValidWalk' walk-- format walk
 
-isValidWalk' :: [Char] -> Bool
+isValidWalk' :: [Direction] -> Bool
 isValidWalk' xs =
   let
-    ns = countOf 'n' xs
-    ss = countOf 's' xs
-    es = countOf 'e' xs
-    ws = countOf 'w' xs
+    ns = countOf North xs
+    ss = countOf South xs
+    es = countOf East xs
+    ws = countOf West xs
   in
     (ns == ss) && (es == ws)
 
 
-countOf :: Char -> [Char] -> Int
+countOf :: Direction -> [Direction] -> Int
 countOf x xs = length $ findIndices (== x) xs

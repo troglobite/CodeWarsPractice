@@ -3,14 +3,14 @@
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
 
-module Types.Server (TenMinuteWalkRequest) where
+module Types.Server (TenMinuteWalkRequest, Direction (..)) where
 
 import GHC.Generics
 import Data.Aeson
 import qualified Data.Char as C
 
 newtype TenMinuteWalkRequest = TenMinuteWalkRequest
-    { directions :: [Direction]    
+    { directions :: [Direction]
     } deriving (Show, Eq, Generic)
 
 -- instance FromJSON TenMinuteWalkRequest where
