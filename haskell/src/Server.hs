@@ -21,7 +21,7 @@ import Servant
 import Servant.Docs
 import Servant.Docs.Internal (ToAuthInfo(..), DocAuthentication(..))
 import Servant.Server.Experimental.Auth
-import Types.Server (TenMinuteWalkRequest)
+import Types.Server (TenMinuteWalkRequest (..), directions)
 import TenMinuteWalk (isValidWalk)
 -- import Types
 
@@ -39,8 +39,7 @@ solutionsAPI = Proxy :: Proxy SolutionsAPI
 
 tenMinuteHandler :: TenMinuteWalkRequest -> Handler Bool
 tenMinuteHandler req = do
-    dirs <- directions req
-    pure $ isValidWalk dirs
+    pure $ isValidWalk $ directions req
     -- pure True
 
 

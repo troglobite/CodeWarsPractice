@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
 
-module Types.Server (TenMinuteWalkRequest, Direction (..)) where
+module Types.Server (TenMinuteWalkRequest, Direction (..), directions) where
 
 import GHC.Generics
 import Data.Aeson
@@ -44,6 +44,7 @@ tenMinuteFromString s =
 
 instance FromJSON Direction
 instance ToJSON Direction
+-- instance Arbitrary Direction
 
 options :: Options
 options = defaultOptions
